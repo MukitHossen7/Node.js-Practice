@@ -7,4 +7,4 @@ const fullName = (p1, p2) => {
   return p1 + " " + p2;
 };
 
-module.exports = { add, name, fullName };
+export { add, name, fullName };

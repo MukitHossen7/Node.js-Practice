@@ -7,4 +7,7 @@ const fullName = (p1, p2) => {
   return p1 + " " + p2;
 };
 
-module.exports = { add, name, fullName };
+const myCourse = "Full stack Web development";
+
+export { add, name, fullName };
+export default myCourse;
