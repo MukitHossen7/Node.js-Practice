@@ -1,4 +1,3 @@
-// const { add: add3, name: name3, fullName: fullName3 } = require("./file3");
 import { add as add3, name as name3, fullName as fullName3 } from "./file3.mjs";
 import { add, name, fullName } from "./file2.mjs";
 import myCourse from "./file3.mjs";
