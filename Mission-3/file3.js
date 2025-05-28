@@ -1,7 +1,7 @@
-const add = (num1, num2) => {
-  return num1 * num2;
+const add = (num1, num2, num3) => {
+  return num1 + num2 + num3;
 };
-const name = "Mukit Hossen";
+const name = "Raju Islam";
 
 const fullName = (p1, p2) => {
   return p1 + " " + p2;
