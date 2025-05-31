@@ -18,6 +18,7 @@ const server = http.createServer((req, res) => {
   else if (req.url === "/todos/create" && req.method === "POST") {
     res.end("Post the Todo DATA");
   } else {
+    res.writeHead(404, { "content-type": "text/plain" });
     res.end("Your res Not Found");
   }
 });
