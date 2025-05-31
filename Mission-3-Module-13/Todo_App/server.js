@@ -13,6 +13,7 @@ const server = http.createServer((req, res) => {
   // GET all todo data
   if (pathName === "/todos" && req.method === "GET") {
     const todo_data = fs.readFileSync(filePath, { encoding: "utf8" });
+
     res.writeHead(200, {
       "content-type": "application/json",
     });
