@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Attend team meeting",
+    "description": "Weekly sync-up at 10 AM via Zoom",
+    "completed": false,
+    "dueDate": "2025-06-01"
+  },
+  {
+    "id": 2,
+    "title": "Write blog post",
+    "description": "Share insights on learning React Hooks",
+    "completed": false,
+    "dueDate": "2025-06-03"
+  }
+]
