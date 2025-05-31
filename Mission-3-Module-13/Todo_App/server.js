@@ -69,6 +69,28 @@ const server = http.createServer((req, res) => {
 
     res.writeHead(200, { "content-type": "text/plain" });
     res.end("Todo Deleted Successfully");
+  }
+  // UPDATE one Todo data
+  else if (pathName === "/todo/update" && req.method === "PATCH") {
+    let data = "";
+    req.on("data", (chunk) => {
+      data = data + chunk;
+    });
+
+    req.on("end", () => {
+      const todo = JSON.parse(data);
+      const todoId = parseInt(query.id);
+      const todoData = JSON.parse(
+        fs.readFileSync(filePath, { encoding: "utf8" })
+      );
+      const todoIndex = todoData.findIndex((data) => data.id === todoId);
+      if (todoIndex !== -1) {
+        todoData[todoIndex] = { ...todoData[todoIndex], ...todo };
+      }
+      fs.writeFileSync(filePath, JSON.stringify(todoData, null, 2));
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(JSON.stringify({ message: "Todo updated successfully!" }));
+    });
   } else {
     res.writeHead(404, { "content-type": "text/plain" });
     res.end("Your res Not Found");

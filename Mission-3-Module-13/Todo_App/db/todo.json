@@ -1,10 +1,10 @@
 [
   {
     "id": 2,
-    "title": "Write blog post",
-    "description": "Share insights on learning React Hooks",
-    "completed": false,
-    "dueDate": "2025-06-03"
+    "title": "Web Development",
+    "description": "Morning workout session",
+    "completed": true,
+    "dueDate": "2025-05-31"
   },
   {
     "id": 3,
