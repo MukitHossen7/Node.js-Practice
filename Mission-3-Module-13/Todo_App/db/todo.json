@@ -12,5 +12,19 @@
     "description": "Share insights on learning React Hooks",
     "completed": false,
     "dueDate": "2025-06-03"
+  },
+  {
+    "id": 3,
+    "title": "Fix mobile responsiveness",
+    "description": "Update CSS for small screen devices",
+    "completed": true,
+    "dueDate": "2025-05-30"
+  },
+  {
+    "id": 4,
+    "title": "Submit job application",
+    "description": "Apply for the frontend developer role at XYZ Inc.",
+    "completed": false,
+    "dueDate": "2025-06-02"
   }
 ]
