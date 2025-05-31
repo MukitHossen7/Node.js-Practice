@@ -9,8 +9,8 @@ const server = http.createServer((req, res) => {
   const parsedUrl = url.parse(req.url, true);
   const pathName = parsedUrl.pathname;
   const query = parsedUrl.query;
-  // GET all todo data
 
+  // GET all todo data
   if (pathName === "/todos" && req.method === "GET") {
     const todo_data = fs.readFileSync(filePath, { encoding: "utf8" });
     res.writeHead(200, {
@@ -40,7 +40,6 @@ const server = http.createServer((req, res) => {
       res.end(JSON.stringify(todo));
     }
   }
-
   // POST a todo data
   else if (pathName === "/todos/create" && req.method === "POST") {
     let data = "";
@@ -58,6 +57,18 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify(todo));
     });
+  }
+  // DELETE one data
+  else if (pathName === "/todo/delete" && req.method === "DELETE") {
+    const todoId = parseInt(query.id);
+    const todoData = JSON.parse(
+      fs.readFileSync(filePath, { encoding: "utf8" })
+    );
+    const filterData = todoData.filter((data) => data.id !== todoId);
+    fs.writeFileSync(filePath, JSON.stringify(filterData, null, 2));
+
+    res.writeHead(200, { "content-type": "text/plain" });
+    res.end("Todo Deleted Successfully");
   } else {
     res.writeHead(404, { "content-type": "text/plain" });
     res.end("Your res Not Found");
