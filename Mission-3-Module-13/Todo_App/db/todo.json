@@ -26,5 +26,12 @@
     "description": "Apply for the frontend developer role at XYZ Inc.",
     "completed": false,
     "dueDate": "2025-06-02"
+  },
+  {
+    "id": 5,
+    "title": "Exercise for 30 minutes",
+    "description": "Morning workout session",
+    "completed": true,
+    "dueDate": "2025-05-31"
   }
 ]

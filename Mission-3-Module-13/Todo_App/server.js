@@ -11,7 +11,7 @@ const server = http.createServer((req, res) => {
   const query = parsedUrl.query;
   // GET all todo data
 
-  if (req.url === "/todos" && req.method === "GET") {
+  if (pathName === "/todos" && req.method === "GET") {
     const todo_data = fs.readFileSync(filePath, { encoding: "utf8" });
     res.writeHead(200, {
       "content-type": "application/json",
@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
   }
 
   // POST a todo data
-  else if (req.url === "/todos/create" && req.method === "POST") {
+  else if (pathName === "/todos/create" && req.method === "POST") {
     let data = "";
     req.on("data", (chunk) => {
       data = data + chunk;
