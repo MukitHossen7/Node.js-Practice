@@ -6,7 +6,9 @@ const url = require("url");
 const filePath = path.join(__dirname, "./db/todo.json");
 
 const server = http.createServer((req, res) => {
-  console.log(req.url);
+  const parsedUrl = url.parse(req.url, true);
+  const pathName = parsedUrl.pathname;
+  const query = parsedUrl.query;
   // GET all todo data
 
   if (req.url === "/todos" && req.method === "GET") {
@@ -17,15 +19,28 @@ const server = http.createServer((req, res) => {
     res.end(todo_data);
   }
   // GET single data
-  else if (req.url === "/todo" && req.method === "GET") {
+  else if (pathName === "/todo" && req.method === "GET") {
+    const todoId = parseInt(query.id);
+    if (!todoId) {
+      res.writeHead(400, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Todo ID is required in query param" }));
+      return;
+    }
     const todo_data = fs.readFileSync(filePath, { encoding: "utf8" });
-    // res.writeHead(200, {
-    //   "content-type": "application/json",
-    // });
-    // res.end(todo_data);
+    const todos = JSON.parse(todo_data);
+    const todo = todos.find((data) => data.id === todoId);
 
-    res.end("Get single data");
+    if (!todo) {
+      res.writeHead(400, { "content-type": "text/plain" });
+      res.end("Can not find any Data");
+    } else {
+      res.writeHead(200, {
+        "content-type": "application/json",
+      });
+      res.end(JSON.stringify(todo));
+    }
   }
+
   // POST a todo data
   else if (req.url === "/todos/create" && req.method === "POST") {
     let data = "";
