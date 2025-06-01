@@ -18,6 +18,13 @@ app.get("/todos", (req: Request, res: Response) => {
   res.json(JSON.parse(todo_data));
 });
 
+//get single data use Params and Queries
+app.get("/todo/:id/:title", (req: Request, res: Response) => {
+  console.log(req.params);
+  console.log(req.query);
+  console.log("I am using Params and Queries");
+  res.send("I am using Params and Queries");
+});
 //post single todo data
 app.post("/todos/create", (req: Request, res: Response) => {
   const todoData = req.body;

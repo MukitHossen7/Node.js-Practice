@@ -18,6 +18,13 @@ app.get("/todos", (req, res) => {
     const todo_data = fs_1.default.readFileSync(filePath, { encoding: "utf8" });
     res.json(JSON.parse(todo_data));
 });
+//get single data use Params and Queries
+app.get("/todo/:id/:title", (req, res) => {
+    console.log(req.params);
+    console.log(req.query);
+    console.log("I am using Params and Queries");
+    res.send("I am using Params and Queries");
+});
 //post single todo data
 app.post("/todos/create", (req, res) => {
     const todoData = req.body;
