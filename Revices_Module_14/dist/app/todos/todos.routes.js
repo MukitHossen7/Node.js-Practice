@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.todosRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const mongodb_1 = require("../../db/mongodb");
+const mongodb_2 = require("mongodb");
 exports.todosRouter = express_1.default.Router();
 //Collection
 const todosCollection = mongodb_1.client.db("todosDB").collection("todos");
@@ -27,5 +28,15 @@ exports.todosRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, fun
 exports.todosRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const todoData = req.body;
     const data = yield todosCollection.insertOne(todoData);
+    res.send(data);
+}));
+exports.todosRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const todoId = req.params.id;
+    const data = yield todosCollection.findOne({ _id: new mongodb_2.ObjectId(todoId) });
+    res.send(data);
+}));
+exports.todosRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const todoId = req.params.id;
+    const data = yield todosCollection.deleteOne({ _id: new mongodb_2.ObjectId(todoId) });
     res.send(data);
 }));
