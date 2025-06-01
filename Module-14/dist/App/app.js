@@ -8,8 +8,15 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 const filePath = path_1.default.join(__dirname, "../../db/todo.json");
+const todoRouter = express_1.default.Router();
 //middleware for user send data use this
 app.use(express_1.default.json());
+app.use("/", todoRouter);
+todoRouter.get("/todos", (req, res) => {
+    console.log("This is Todo Router");
+    // const todo_data = fs.readFileSync(filePath, { encoding: "utf8" });
+    res.json({ massage: "This is Todo Router" });
+});
 app.get("/", (req, res) => {
     res.send("Hello New Express Developer !!!");
 });
