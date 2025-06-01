@@ -30,10 +30,15 @@ exports.todosRouter.post("/create", (req, res) => __awaiter(void 0, void 0, void
     const data = yield todosCollection.insertOne(todoData);
     res.send(data);
 }));
-exports.todosRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const todoId = req.params.id;
-    const data = yield todosCollection.findOne({ _id: new mongodb_2.ObjectId(todoId) });
-    res.send(data);
+exports.todosRouter.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const todoId = req.params.id;
+        const data = yield todosCollection.findOne({ _id: new mongodb_2.ObjectId(todoId) });
+        res.send(data);
+    }
+    catch (error) {
+        next(error);
+    }
 }));
 exports.todosRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const todoId = req.params.id;
@@ -56,3 +61,14 @@ exports.todosRouter.put("/update-todo/:id", (req, res) => __awaiter(void 0, void
     const data = yield todosCollection.updateOne(filter, updateDoc);
     res.send(data);
 }));
+exports.todosRouter.use((req, res) => {
+    res.status(404).json({ message: "Your path not found" });
+});
+// { message: "Your path not found" }
+exports.todosRouter.use((error, req, res, next) => {
+    if (error) {
+        res
+            .status(404)
+            .json({ message: error.message || "Something went wrong" });
+    }
+});
