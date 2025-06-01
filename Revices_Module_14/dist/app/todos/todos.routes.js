@@ -40,3 +40,19 @@ exports.todosRouter.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 
     const data = yield todosCollection.deleteOne({ _id: new mongodb_2.ObjectId(todoId) });
     res.send(data);
 }));
+exports.todosRouter.put("/update-todo/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const todoId = req.params.id;
+    const { title, description, completed, dueDate } = req.body;
+    const filter = { _id: new mongodb_2.ObjectId(todoId) };
+    //   const options = { upsert: true };
+    const updateDoc = {
+        $set: {
+            title: title,
+            description: description,
+            completed: completed,
+            dueDate: dueDate,
+        },
+    };
+    const data = yield todosCollection.updateOne(filter, updateDoc);
+    res.send(data);
+}));

@@ -31,3 +31,21 @@ todosRouter.delete("/:id", async (req: Request, res: Response) => {
   const data = await todosCollection.deleteOne({ _id: new ObjectId(todoId) });
   res.send(data);
 });
+
+todosRouter.put("/update-todo/:id", async (req: Request, res: Response) => {
+  const todoId = req.params.id;
+  const { title, description, completed, dueDate } = req.body;
+
+  const filter = { _id: new ObjectId(todoId) };
+  //   const options = { upsert: true };
+  const updateDoc = {
+    $set: {
+      title: title,
+      description: description,
+      completed: completed,
+      dueDate: dueDate,
+    },
+  };
+  const data = await todosCollection.updateOne(filter, updateDoc);
+  res.send(data);
+});
