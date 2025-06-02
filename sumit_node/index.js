@@ -1,7 +1,7 @@
-const path = require("path");
-const os = require("os");
-const fs = require("fs");
-const pathName = "E:/Node.js-Practice/sumit_node/index.js";
+// const path = require("path");
+// const os = require("os");
+// const fs = require("fs");
+// const pathName = "E:/Node.js-Practice/sumit_node/index.js";
 // console.log(path.basename(pathName));
 // console.log(path.dirname(pathName));
 // console.log(path.extname(pathName));
@@ -13,4 +13,17 @@ const pathName = "E:/Node.js-Practice/sumit_node/index.js";
 // console.log(os.cpus());
 
 // fs.writeFileSync("text.txt", "Hello Developer");
-fs.appendFileSync("text.txt", "Hello Mukit \n");
+// fs.appendFileSync("text.txt", "Hello Mukit \n");
+
+const School = require("./event");
+const school = new School();
+
+school.on("ballring", () => {
+  console.log("The class is ended");
+});
+
+school.event();
+
+// setTimeout(() => {
+//   emitter.emit("ballring");
+// }, 2000);
