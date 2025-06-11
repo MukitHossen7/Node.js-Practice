@@ -9,12 +9,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllTodos = void 0;
+exports.postTodos = exports.getAllTodos = void 0;
 const mongodb_1 = require("../db/mongodb");
 //collection
 const todosCollection = mongodb_1.client.db("CRUD_DB").collection("todos");
 const getAllTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield todosCollection.find().toArray();
-    res.json(result);
+    res.send(result);
 });
 exports.getAllTodos = getAllTodos;
+const postTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const body = req.body;
+    const result = yield todosCollection.insertOne(body);
+    res.send(result);
+});
+exports.postTodos = postTodos;
+const deleteTodosById = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });

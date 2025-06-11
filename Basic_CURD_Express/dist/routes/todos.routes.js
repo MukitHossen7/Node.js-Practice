@@ -8,9 +8,5 @@ const express_1 = __importDefault(require("express"));
 const todos_controller_1 = require("../controller/todos.controller");
 //Single routing
 exports.todosRouter = express_1.default.Router();
+exports.todosRouter.post("/", todos_controller_1.postTodos);
 exports.todosRouter.get("/GET", todos_controller_1.getAllTodos);
-// todosRouter.post("/", async (req: Request, res: Response) => {
-//   const body = req.body;
-//   const result = await todosCollection.insertOne(body);
-//   res.send(result);
-// });
