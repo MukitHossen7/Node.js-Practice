@@ -12,14 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const app = (0, express_1.default)();
+const app_1 = __importDefault(require("./app"));
 const port = 5000;
-app.get("/", (req, res) => {
-    res.send("I do CRUD operation");
-});
 const serverConnection = () => __awaiter(void 0, void 0, void 0, function* () {
-    app.listen(port, () => {
+    app_1.default.listen(port, () => {
         console.log(`Server listening on port ${port}`);
     });
 });
