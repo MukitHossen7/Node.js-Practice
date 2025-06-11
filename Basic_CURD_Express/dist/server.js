@@ -13,8 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const app_1 = __importDefault(require("./app"));
+const mongodb_1 = require("./db/mongodb");
 const port = 5000;
 const serverConnection = () => __awaiter(void 0, void 0, void 0, function* () {
+    yield mongodb_1.client.connect();
+    yield mongodb_1.client.db("CRUD_DB").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
     app_1.default.listen(port, () => {
         console.log(`Server listening on port ${port}`);
     });
