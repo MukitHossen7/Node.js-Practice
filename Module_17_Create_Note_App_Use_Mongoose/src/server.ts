@@ -6,7 +6,7 @@ const PORT = 5000;
 const serverConnection = async () => {
   try {
     // Connect to Mongoose
-    await mongoose.connect("mongodb://localhost:27017/CRUD_DB");
+    await mongoose.connect("mongodb://localhost:27017/Note_App_DB");
     console.log("Connected to MongoDB successfully");
     // Start the Express server
     app.listen(PORT, () => {
