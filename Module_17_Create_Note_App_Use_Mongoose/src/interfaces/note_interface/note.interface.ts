@@ -1,4 +1,4 @@
-interface INote {
+export interface INote {
   title: string;
   tags: string[];
   metadata: {
