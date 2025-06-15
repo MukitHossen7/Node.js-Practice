@@ -1,56 +1,62 @@
 import { model, Schema } from "mongoose";
 
-const noteSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  tags: [
-    {
-      type: String,
-      default: [],
-    },
-  ],
-  metadata: {
-    createdBy: {
+const noteSchema = new Schema(
+  {
+    title: {
       type: String,
       required: true,
+      trim: true,
     },
-    department: {
-      type: String,
-      required: true,
-    },
-  },
-  tasks: [
-    {
-      task: {
+    tags: [
+      {
+        type: String,
+        default: [],
+      },
+    ],
+    metadata: {
+      createdBy: {
         type: String,
         required: true,
       },
-      assignedTo: {
+      department: {
         type: String,
-      },
-      completed: {
-        type: Boolean,
-        default: false,
+        required: true,
       },
     },
-  ],
-  isImportant: {
-    type: Boolean,
-    default: false,
+    tasks: [
+      {
+        task: {
+          type: String,
+          required: true,
+        },
+        assignedTo: {
+          type: String,
+        },
+        completed: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    ],
+    isImportant: {
+      type: Boolean,
+      default: false,
+    },
+    priority: {
+      type: Number,
+      required: true,
+    },
+    category: {
+      type: String,
+      enum: ["Work", "Personal", "Other"],
+      default: "Other",
+    },
   },
-  priority: {
-    type: Number,
-    required: true,
-  },
-  category: {
-    type: String,
-    enum: ["Work", "Personal", "Other"],
-    default: "Other",
-  },
-});
+  {
+    versionKey: false,
+    timestamps: true,
+  }
+);
 
 const Note = model("Note", noteSchema);
 export default Note;
