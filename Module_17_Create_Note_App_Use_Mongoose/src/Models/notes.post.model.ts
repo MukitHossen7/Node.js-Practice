@@ -8,6 +8,10 @@ const noteSchema = new Schema<INote>(
       required: true,
       trim: true,
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     tags: [
       {
         type: String,

@@ -1,5 +1,8 @@
+import { Types } from "mongoose";
+
 export interface INote {
   title: string;
+  userId: Types.ObjectId;
   tags: string[];
   metadata: {
     createdBy: string;
