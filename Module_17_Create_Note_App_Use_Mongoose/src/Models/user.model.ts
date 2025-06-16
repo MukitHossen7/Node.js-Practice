@@ -7,6 +7,8 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       trim: true,
+      minLength: 10,
+      maxLength: 20,
     },
     lname: {
       type: String,
@@ -23,12 +25,13 @@ const userSchema = new Schema<IUser>(
     password: {
       type: Number,
       required: true,
-      minlength: 6,
+      min: 100000,
     },
     age: {
       type: Number,
       required: true,
-      min: 0,
+      min: 18,
+      max: 40,
     },
     role: {
       type: String,
