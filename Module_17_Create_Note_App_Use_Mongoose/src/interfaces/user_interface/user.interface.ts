@@ -6,4 +6,5 @@ export interface IUser {
   age: number;
   role: "user" | "admin";
   isActive: boolean;
+  phoneNumber: string;
 }

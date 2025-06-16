@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { IUser } from "../interfaces/user_interface/user.interface";
+import validator from "validator";
 
 const userSchema = new Schema<IUser>(
   {
@@ -21,6 +22,7 @@ const userSchema = new Schema<IUser>(
       unique: [true, "Email must be unique"],
       trim: true,
       lowercase: true,
+      validate: [validator.isEmail, "Please provide a valid email address"],
     },
     password: {
       type: Number,
@@ -41,6 +43,19 @@ const userSchema = new Schema<IUser>(
     isActive: {
       type: Boolean,
       default: false,
+    },
+    phoneNumber: {
+      type: String,
+      required: true,
+      unique: [true, "Phone number must be unique"],
+      trim: true,
+      validate: {
+        validator: function (value: string) {
+          return /^\+8801\d+$/.test(value);
+        },
+        message: (props: { value: string }) =>
+          `${props.value} is not a valid phone number! It should start with +8801 and be followed by 9 digits.`,
+      },
     },
   },
   {
