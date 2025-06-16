@@ -7,7 +7,7 @@ const userSchema = new Schema<IUser>(
       type: String,
       required: true,
       trim: true,
-      minLength: 10,
+      minLength: [10, "Must be at least 10, got {VALUE}"],
       maxLength: 20,
     },
     lname: {
@@ -18,19 +18,19 @@ const userSchema = new Schema<IUser>(
     email: {
       type: String,
       required: true,
-      unique: true,
+      unique: [true, "Email must be unique"],
       trim: true,
       lowercase: true,
     },
     password: {
       type: Number,
       required: true,
-      min: 100000,
+      min: [100000, "Must be at least 6 digits, got {VALUE}"],
     },
     age: {
       type: Number,
       required: true,
-      min: 18,
+      min: [18, "Must be at least 18, got {VALUE}"],
       max: 40,
     },
     role: {
