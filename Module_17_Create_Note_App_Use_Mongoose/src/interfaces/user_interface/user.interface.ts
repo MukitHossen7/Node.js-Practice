@@ -17,6 +17,6 @@ export interface IUser {
   address: IAddress;
 }
 
-export interface IUserMethods {
+export interface UserInstanceMethods {
   hashPassword(password: string): string;
 }
