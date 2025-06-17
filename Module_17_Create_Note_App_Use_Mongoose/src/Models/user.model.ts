@@ -3,6 +3,7 @@ import { IAddress, IUser } from "../interfaces/user_interface/user.interface";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import { userHashPassword } from "../middleware/user.hash.password/user.hash.password";
+import { userSaveData } from "../middleware/user.save.data/user.save.data";
 
 const addressSchema = new Schema<IAddress>(
   {
@@ -107,6 +108,7 @@ const userSchema = new Schema<IUser>(
 //   return passwordHash;
 // });
 userSchema.pre("save", userHashPassword);
+userSchema.post("save", userSaveData);
 
 const User = model<IUser>("User", userSchema);
 export default User;
