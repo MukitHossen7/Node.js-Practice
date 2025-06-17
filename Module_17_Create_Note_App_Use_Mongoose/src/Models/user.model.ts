@@ -1,9 +1,5 @@
 import { model, Schema } from "mongoose";
-import {
-  IAddress,
-  IUser,
-  UserStaticsMethods,
-} from "../interfaces/user_interface/user.interface";
+import { IAddress, IUser } from "../interfaces/user_interface/user.interface";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 
@@ -34,7 +30,7 @@ const addressSchema = new Schema<IAddress>(
   }
 );
 
-const userSchema = new Schema<IUser, UserStaticsMethods>(
+const userSchema = new Schema<IUser>(
   {
     fname: {
       type: String,
@@ -106,10 +102,10 @@ const userSchema = new Schema<IUser, UserStaticsMethods>(
 //   return passwordHash;
 // });
 
-userSchema.static("hashStaticPassword", async function (pass: string) {
-  const passwordHash = await bcrypt.hash(pass, 10);
-  return passwordHash;
-});
+// userSchema.static("hashStaticPassword", async function (pass: string) {
+//   const passwordHash = await bcrypt.hash(pass, 10);
+//   return passwordHash;
+// });
 
-const User = model<IUser, UserStaticsMethods>("User", userSchema);
+const User = model<IUser>("User", userSchema);
 export default User;

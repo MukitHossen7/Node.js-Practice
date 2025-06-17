@@ -19,10 +19,10 @@ export interface IUser {
   address: IAddress;
 }
 
-export interface UserInstanceMethods {
-  hashPassword(password: string): string;
-}
+// export interface UserInstanceMethods {
+//   hashPassword(password: string): string;
+// }
 
-export interface UserStaticsMethods extends Model<IUser> {
-  hashStaticPassword(password: string): string;
-}
+// export interface UserStaticsMethods extends Model<IUser> {
+//   hashStaticPassword(password: string): string;
+// }

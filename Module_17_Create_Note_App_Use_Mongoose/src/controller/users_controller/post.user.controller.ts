@@ -6,7 +6,7 @@ export const postUser = async (req: Request, res: Response) => {
   try {
     const body = req.body;
     const data = await UserZodSchema.parseAsync(body);
-    data.password = await User.hashStaticPassword(data.password);
+    // data.password = await User.hashStaticPassword(data.password);
     const result = await User.create(data);
     // const user = new User(data);
     // user.password = await user.hashPassword(data.password);
