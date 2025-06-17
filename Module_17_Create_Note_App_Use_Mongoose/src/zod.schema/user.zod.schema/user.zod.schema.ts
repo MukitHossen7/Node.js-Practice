@@ -4,7 +4,7 @@ export const UserZodSchema = z.object({
   fname: z.string(),
   lname: z.string(),
   email: z.string(),
-  password: z.number(),
+  password: z.string(),
   age: z.number(),
   role: z.enum(["user", "admin"]).optional(),
   isActive: z.boolean(),

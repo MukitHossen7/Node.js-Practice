@@ -9,7 +9,7 @@ export interface IUser {
   fname: string;
   lname: string;
   email: string;
-  password: number;
+  password: string;
   age: number;
   role: "user" | "admin";
   isActive: boolean;

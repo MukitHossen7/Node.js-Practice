@@ -52,9 +52,10 @@ const userSchema = new Schema<IUser>(
       validate: [validator.isEmail, "Please provide a valid email address"],
     },
     password: {
-      type: Number,
+      type: String,
+      trim: true,
       required: true,
-      min: [100000, "Must be at least 6 digits, got {VALUE}"],
+      minlength: [6, "Must be at least 6 digits, got {VALUE}"],
     },
     age: {
       type: Number,
