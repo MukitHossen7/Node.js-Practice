@@ -3,7 +3,7 @@ import Note from "../../Models/notes.post.model";
 
 export const getNotes = async (req: Request, res: Response) => {
   try {
-    const result = await Note.find();
+    const result = await Note.find().populate("user");
     res.send(result);
   } catch (error) {
     console.error("Error in getNotes:", error);
