@@ -2,6 +2,7 @@ import { model, Schema } from "mongoose";
 import { IAddress, IUser } from "../interfaces/user_interface/user.interface";
 import validator from "validator";
 import bcrypt from "bcryptjs";
+import { userHashPassword } from "../middleware/user.hash.password/user.hash.password";
 
 const addressSchema = new Schema<IAddress>(
   {
@@ -76,7 +77,6 @@ const userSchema = new Schema<IUser>(
     phoneNumber: {
       type: String,
       required: true,
-      unique: [true, "Phone number must be unique"],
       trim: true,
       validate: {
         validator: function (value: string) {
@@ -106,6 +106,7 @@ const userSchema = new Schema<IUser>(
 //   const passwordHash = await bcrypt.hash(pass, 10);
 //   return passwordHash;
 // });
+userSchema.pre("save", userHashPassword);
 
 const User = model<IUser>("User", userSchema);
 export default User;
