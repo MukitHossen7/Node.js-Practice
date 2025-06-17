@@ -1,6 +1,33 @@
 import { model, Schema } from "mongoose";
-import { IUser } from "../interfaces/user_interface/user.interface";
+import { IAddress, IUser } from "../interfaces/user_interface/user.interface";
 import validator from "validator";
+
+const addressSchema = new Schema<IAddress>(
+  {
+    street: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    city: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    country: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    zipCode: {
+      type: Number,
+      required: true,
+    },
+  },
+  {
+    _id: false,
+  }
+);
 
 const userSchema = new Schema<IUser>(
   {
@@ -56,6 +83,10 @@ const userSchema = new Schema<IUser>(
         message: (props: { value: string }) =>
           `${props.value} is not a valid phone number! It should start with +8801 and be followed by 9 digits.`,
       },
+    },
+    address: {
+      type: addressSchema,
+      required: true,
     },
   },
   {

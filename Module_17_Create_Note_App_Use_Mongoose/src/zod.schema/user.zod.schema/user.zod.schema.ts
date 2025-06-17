@@ -9,4 +9,10 @@ export const UserZodSchema = z.object({
   role: z.enum(["user", "admin"]).optional(),
   isActive: z.boolean(),
   phoneNumber: z.string(),
+  address: z.object({
+    street: z.string(),
+    city: z.string(),
+    country: z.string(),
+    zipCode: z.number(),
+  }),
 });
