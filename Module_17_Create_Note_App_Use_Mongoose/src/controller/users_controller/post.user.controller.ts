@@ -10,6 +10,9 @@ export const postUser = async (req: Request, res: Response) => {
     res.send(result);
   } catch (error) {
     console.error("Error creating user:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      message: "Internal server error",
+      error: error,
+    });
   }
 };
