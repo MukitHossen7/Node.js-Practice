@@ -16,3 +16,7 @@ export interface IUser {
   phoneNumber: string;
   address: IAddress;
 }
+
+export interface IUserMethods {
+  hashPassword(password: string): string;
+}
