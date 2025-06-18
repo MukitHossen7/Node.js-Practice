@@ -1,11 +1,14 @@
 import Note from "../../Models/notes.post.model";
+import { HydratedDocument } from "mongoose";
+import { IUser } from "../../interfaces/user_interface/user.interface";
 
-export async function deleteAllNotes(doc: any, next: any) {
-  try {
-    await Note.deleteMany({ user: doc._id });
-    next();
-  } catch (error) {
-    console.error("Error in deleteAllNotes middleware:", error);
-    next(error);
+export async function deleteAllNotes(doc: HydratedDocument<IUser>) {
+  console.log(doc);
+  if (doc) {
+    try {
+      await Note.deleteMany({ user: doc._id });
+    } catch (error) {
+      console.error("Error in deleteAllNotes middleware:", error);
+    }
   }
 }
