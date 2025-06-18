@@ -4,6 +4,7 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 import { userHashPassword } from "../middleware/user.hash.password/user.hash.password";
 import { userSaveData } from "../middleware/user.save.data/user.save.data";
+import { deleteAllNotes } from "../middleware/delete.notes/delete.notes";
 
 const addressSchema = new Schema<IAddress>(
   {
@@ -109,6 +110,7 @@ const userSchema = new Schema<IUser>(
 // });
 userSchema.pre("save", userHashPassword);
 userSchema.post("save", userSaveData);
+userSchema.post("findOneAndDelete", deleteAllNotes);
 
 const User = model<IUser>("User", userSchema);
 export default User;
