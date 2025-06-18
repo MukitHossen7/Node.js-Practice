@@ -96,6 +96,8 @@ const userSchema = new Schema<IUser>(
   {
     timestamps: true,
     versionKey: false,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
@@ -111,6 +113,10 @@ const userSchema = new Schema<IUser>(
 userSchema.pre("save", userHashPassword);
 userSchema.post("save", userSaveData);
 userSchema.post("findOneAndDelete", deleteAllNotes);
+
+userSchema.virtual("fullName").get(function () {
+  return `${this.fname} ${this.lname}`;
+});
 
 const User = model<IUser>("User", userSchema);
 export default User;
