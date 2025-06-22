@@ -1,8 +1,9 @@
-import { model, Schema } from "mongoose";
-import { IBorrow, UpdateAvailabilityMethod } from "./borrow.interface";
+import { HydratedDocument, model, Schema } from "mongoose";
+import { IBorrow } from "./borrow.interface";
 import Book from "../book/book.model";
+import { NextFunction } from "express";
 
-const borrowSchema = new Schema<IBorrow, UpdateAvailabilityMethod>(
+const borrowSchema = new Schema<IBorrow>(
   {
     book: {
       type: Schema.Types.ObjectId,
@@ -25,36 +26,24 @@ const borrowSchema = new Schema<IBorrow, UpdateAvailabilityMethod>(
   }
 );
 
-borrowSchema.post("save", async function () {
-  console.log(this);
-  await Book.findByIdAndUpdate(
-    this.book,
-    {
-      $inc: {
-        copies: -this.quantity,
-      },
-    },
-    { new: true, runValidators: true }
-  );
-});
+// Deduct the requested quantity from the book's available copies use post middleware hook
 
-borrowSchema.static(
-  "updateAvailability",
-  async function updateAvailabilityFunction(id: string) {
-    const findBook = await Book.findById(id);
-    if (findBook?.copies === 0) {
-      await Book.findByIdAndUpdate(
-        id,
-        {
-          $set: {
-            available: false,
-          },
+borrowSchema.post(
+  "save",
+  async function (doc: HydratedDocument<IBorrow>, next: () => void) {
+    await Book.findByIdAndUpdate(
+      doc.book,
+      {
+        $inc: {
+          copies: -doc.quantity,
         },
-        { runValidators: true }
-      );
-    }
+      },
+      { new: true, runValidators: true }
+    );
+    await Book.updateAvailability(doc.book.toString());
+    next();
   }
 );
 
-const Borrow = model<IBorrow, UpdateAvailabilityMethod>("Borrow", borrowSchema);
+const Borrow = model<IBorrow>("Borrow", borrowSchema);
 export default Borrow;

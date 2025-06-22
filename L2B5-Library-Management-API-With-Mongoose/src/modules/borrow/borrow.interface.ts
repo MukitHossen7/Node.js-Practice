@@ -5,7 +5,3 @@ export interface IBorrow {
   quantity: number;
   dueDate: Date;
 }
-
-export interface UpdateAvailabilityMethod extends Model<IBorrow> {
-  updateAvailability(id: string): void;
-}
