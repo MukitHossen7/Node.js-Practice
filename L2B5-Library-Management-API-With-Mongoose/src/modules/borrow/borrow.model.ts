@@ -25,6 +25,19 @@ const borrowSchema = new Schema<IBorrow, UpdateAvailabilityMethod>(
   }
 );
 
+borrowSchema.post("save", async function () {
+  console.log(this);
+  await Book.findByIdAndUpdate(
+    this.book,
+    {
+      $inc: {
+        copies: -this.quantity,
+      },
+    },
+    { new: true, runValidators: true }
+  );
+});
+
 borrowSchema.static(
   "updateAvailability",
   async function updateAvailabilityFunction(id: string) {
