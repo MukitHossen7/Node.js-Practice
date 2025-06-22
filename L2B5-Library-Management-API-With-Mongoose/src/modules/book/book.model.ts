@@ -1,4 +1,4 @@
-import mongoose, { model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import { IBook, UpdateAvailabilityMethod } from "./book.interface";
 import Borrow from "../borrow/borrow.model";
 
@@ -59,7 +59,7 @@ const bookSchema = new Schema<IBook, UpdateAvailabilityMethod>(
 bookSchema.post(
   ["findOneAndDelete", "deleteMany", "deleteOne"],
   async function (doc) {
-    await Borrow.deleteMany({ book: new mongoose.Types.ObjectId(doc._id) });
+    await Borrow.deleteMany({ book: doc._id });
   }
 );
 // implement If copies become 0, update available to false using a static method
